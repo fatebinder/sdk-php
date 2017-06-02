@@ -7,23 +7,18 @@ use Easir\SDK\Request;
 use Easir\SDK\Request\Model\ListCompanyAccounts as ListCompanyAccountsModel;
 use Easir\SDK\Response\ListCompanyAccounts as ListCompanyAccountsResponse;
 
-/**
- * Request class for listing company accounts
- *
- * @package Easir\SDK\Request
- */
 class ListCompanyAccounts extends Request
 {
     /**
      * @var string
      */
-    protected $url = '/accounts?q=%s';
+    protected $url = '/accounts?page=%d&per_page=%d&q=%s';
     /**
      * @var string
      */
     public $method = 'GET';
     /**
-     * @var string
+     * @var bool
      */
     public $requiresAuth = true;
     /**
@@ -43,6 +38,10 @@ class ListCompanyAccounts extends Request
     {
         $this->checkModel();
 
-        return sprintf(parent::getUrl(), urlencode((string)$this->model->searchTerm));
+        return sprintf(parent::getUrl(),
+            (int)$this->model->page,
+            (int)$this->model->perPage,
+            urlencode((string)$this->model->searchTerm)
+        );
     }
 }
