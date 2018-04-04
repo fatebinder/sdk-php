@@ -22,7 +22,9 @@ class Consent extends Response
      * @var int
      */
     public $user_id;
-
+    /**
+     * @var string
+     */
     public $campaign_id;
     /**
      * @var string
